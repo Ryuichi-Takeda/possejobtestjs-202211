@@ -42,8 +42,9 @@ function check(question_id, selection_id, valid_id) {
     console.log(countCorrectNumber);
     answerbox.style.display = 'block';
     answerbox.classList.add("fadein");
-    if(countAnsweredNumber==3){
-        var finalResult=`<div id="finalResultBox">${question_list.length}問中${countCorrectNumber}問正解</div>`;
+    let questionLength=question_list.length;
+    if(countAnsweredNumber==questionLength){
+        var finalResult=`<div id="finalResultBox">${questionLength}問中${countCorrectNumber}問正解</div>`;
         document.getElementById('main').insertAdjacentHTML('beforeend', finalResult);
     }
 }
