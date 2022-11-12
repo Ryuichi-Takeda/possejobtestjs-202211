@@ -9,6 +9,8 @@ question_list.push(['こうじまち', 'おかとまち', 'かゆまち']);
 // question_id：問題番号、1問目の場合は[1]を受け取る
 // selection_id：回答番号、選択された選択肢の番号を受け取る
 // valid_id：正解番号、正解の選択肢の番号を受け取る
+let countCorrectNumber=0;
+let countAnsweredNumber=0;
 function check(question_id, selection_id, valid_id) {
 
     // クリック無効化
@@ -28,14 +30,22 @@ function check(question_id, selection_id, valid_id) {
     // 正解・不正解の表示設定処理
     var answerbox = document.getElementById('answerbox_' + question_id);
     var answertext = document.getElementById('answertext_' + question_id);
+    countAnsweredNumber++;
     if (selection_id == valid_id) {
         answertext.className = 'answerbox_valid';
-        answertext.innerText = '正解！';
+        answertext.innerText = '正解！';   
+        countCorrectNumber++;    
     } else {
         answertext.className = 'answerbox_invalid';
         answertext.innerText = '不正解！';
     }
+    console.log(countCorrectNumber);
     answerbox.style.display = 'block';
+    answerbox.classList.add("fadein");
+    if(countAnsweredNumber==3){
+        var finalResult=`<div id="finalResultBox">${question_list.length}問中${countCorrectNumber}問正解</div>`;
+        document.getElementById('main').insertAdjacentHTML('beforeend', finalResult);
+    }
 }
 
 // 問題分のHTMLを生成して出力する
